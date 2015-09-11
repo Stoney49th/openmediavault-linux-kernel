@@ -44,4 +44,9 @@ I do not take any liablity in dataloss, damage, downtime, etc. in any way, shape
 8. Install them as needed (the -dbg is really large and usually not needed)
 9. Switch kernels, maybe also adapt boot params and reboot
 
+## MISC
+
+* if you experience problems with hibernate, adding "resume=UUID=UUIDOFYOURSWAPPARTITION ro" to the kernel boot params in /etc/default/grub followed by update-grub might help
+* More things to follow as they pop up
+
 openmediavault is great! thanks to everybody and especially volker for all the work on this great and open project!!!
