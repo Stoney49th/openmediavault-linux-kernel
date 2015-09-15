@@ -16,11 +16,13 @@ I do not take any liablity in dataloss, damage, downtime, etc. in any way, shape
 
 ## Contents
 
-* linux kernel 4.1.6 with aufs4.1 standalone patchset applied: [kernel-dir] (https://github.com/Stoney49th/openmediavault-linux-kernel/tree/master/kernel) -> directory with pre-build amd64 packages [linux-source-dir] (https://github.com/Stoney49th/openmediavault-linux-kernel/tree/master/kernel/linux-4.1.6) -> kernel source with config for building on your own
+* linux kernel with aufs standalone patchset applied: [kernel-dir] (https://github.com/Stoney49th/openmediavault-linux-kernel/tree/master/kernel) -> directory with pre-build amd64 packages [linux-source-dir] (https://github.com/Stoney49th/openmediavault-linux-kernel/tree/master/kernel/linux-src) -> kernel source with config for building on your own
 * btrfs-tools version to go alongside the kernel from debian for convenience
 * aufs-source: [aufs-source-dir](https://github.com/Stoney49th/openmediavault-linux-kernel/tree/master/aufs4-standalone-aufs4.1)-> aufs source to go with this kernel, as a reference and for completeness if you wish to patch/repatch yourself
 
 ## Installing the prebuild packages
+
+Be sure to checkout the tag you want, the master branch might be at an unstable development stage.
 
 1. pull the repository to some location on your NAS
 2. cd into /yourPullLocation/kernel
@@ -32,6 +34,8 @@ I do not take any liablity in dataloss, damage, downtime, etc. in any way, shape
 8. Check if kernel used with "uname -r"
 
 ## Building on your own (advanced)
+
+Be sure to checkout the tag you want, the master branch might be at an unstable development stage.
 
 1. pull the repository
 2. remove old packages in /kernel
