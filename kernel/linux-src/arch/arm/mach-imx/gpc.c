@@ -291,6 +291,8 @@ void __init imx_gpc_check_dt(void)
 	}
 }
 
+#ifdef CONFIG_PM_GENERIC_DOMAINS
+
 static void _imx6q_pm_pu_power_off(struct generic_pm_domain *genpd)
 {
 	int iso, iso2sw;
@@ -397,6 +399,7 @@ static struct genpd_onecell_data imx_gpc_onecell_data = {
 static int imx_gpc_genpd_init(struct device *dev, struct regulator *pu_reg)
 {
 	struct clk *clk;
+	bool is_off;
 	int i;
 
 	imx6q_pu_domain.reg = pu_reg;
@@ -413,13 +416,18 @@ static int imx_gpc_genpd_init(struct device *dev, struct regulator *pu_reg)
 	}
 	imx6q_pu_domain.num_clks = i;
 
-	/* Enable power always in case bootloader disabled it. */
-	imx6q_pm_pu_power_on(&imx6q_pu_domain.base);
+	is_off = IS_ENABLED(CONFIG_PM);
+	if (is_off) {
+		_imx6q_pm_pu_power_off(&imx6q_pu_domain.base);
+	} else {
+		/*
+		 * Enable power if compiled without CONFIG_PM in case the
+		 * bootloader disabled it.
+		 */
+		imx6q_pm_pu_power_on(&imx6q_pu_domain.base);
+	}
 
-	if (!IS_ENABLED(CONFIG_PM_GENERIC_DOMAINS))
-		return 0;
-
-	pm_genpd_init(&imx6q_pu_domain.base, NULL, false);
+	pm_genpd_init(&imx6q_pu_domain.base, NULL, is_off);
 	return of_genpd_add_provider_onecell(dev->of_node,
 					     &imx_gpc_onecell_data);
 
@@ -428,6 +436,13 @@ clk_err:
 		clk_put(imx6q_pu_domain.clk[i]);
 	return -EINVAL;
 }
+
+#else
+static inline int imx_gpc_genpd_init(struct device *dev, struct regulator *reg)
+{
+	return 0;
+}
+#endif /* CONFIG_PM_GENERIC_DOMAINS */
 
 static int imx_gpc_probe(struct platform_device *pdev)
 {

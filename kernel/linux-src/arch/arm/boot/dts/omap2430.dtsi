@@ -51,8 +51,7 @@
 				};
 
 				scm_conf: scm_conf@270 {
-					compatible = "syscon",
-						     "simple-bus";
+					compatible = "syscon";
 					reg = <0x270 0x240>;
 					#address-cells = <1>;
 					#size-cells = <1>;

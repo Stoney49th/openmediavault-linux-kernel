@@ -191,8 +191,7 @@
 				};
 
 				omap4_padconf_global: omap4_padconf_global@5a0 {
-					compatible = "syscon",
-						     "simple-bus";
+					compatible = "syscon";
 					reg = <0x5a0 0x170>;
 					#address-cells = <1>;
 					#size-cells = <1>;
