@@ -32,6 +32,8 @@ cd ./linux-4.1.15
 wget https://github.com/Stoney49th/openmediavault-linux-kernel/raw/master/.config-4.1.15
 mv ./.config-4.1.15 ./.config
 
+read -rsp $'\n\nFinished with all download and decompress steps. Will launch menuconfig now. If you dont want to change anything, just exit menuconfig without saving. Please press any key...\n'
+make menuconfig
 read -rsp $'\n\nFinished with all download and decompress steps. Press any key to start a clean build ...\n'
 
 make-kpkg clean
