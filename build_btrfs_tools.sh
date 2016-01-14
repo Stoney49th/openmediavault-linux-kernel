@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #install prerequisites
-yes "" | apt-get install build-essential debhelper dh-make quilt fakeroot lintian git
+yes "" | apt-get install build-essential debhelper devscripts dh-make quilt fakeroot lintian git
 yes "" | apt-get install asciidoc xmlto --no-install-recommends
 yes "" | apt-get install uuid-dev libattr1-dev zlib1g-dev libacl1-dev e2fslibs-dev libblkid-dev liblzo2-dev automake pkg-config
 
