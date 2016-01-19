@@ -10,7 +10,7 @@ echo "
 ***************************************
 "
 #install prerequisites
-yes "" | apt-get install git fakeroot build-essential ncurses-dev xz-utils
+yes "" | apt-get install git fakeroot build-essential ncurses-dev xz-utils bc
 yes "" | apt-get --no-install-recommends install kernel-package
 
 #create directory and download
