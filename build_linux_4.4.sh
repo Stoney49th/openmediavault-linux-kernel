@@ -1,5 +1,7 @@
 #!/bin/bash
 
+linux_version=4.4.2
+
 echo "Please choose a custom kernel revision and name, like 1.0.fooMyName. Must start with a number, only '.' and '+' special chars allowed: "
 read custom_rev
 echo "Will use $custom_rev, resulting in something like linux-4.4.XX-amd64-$custom_rev"
@@ -21,18 +23,19 @@ echo "
 	Downloading and Decompressing Source
 ***************************************
 "
-[ -f ./linux-4.4.1.tar.xz ] && echo "Kernel Archive already downloaded, skipping download..." || wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.4.1.tar.xz
+[ -f ./linux-$linux_version.tar.xz ] && echo "Kernel Archive already downloaded, skipping download..." || wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-$linux_version.tar.xz
 
-[ -d ./linux-4.4.1 ] && rm -r ./linux-4.4.1 
+[ -d ./linux-$linux_version ] && rm -r ./linux-$linux_version 
 echo "Extracting source now, this may take a while..."
-tar xf linux-4.4.1.tar.xz
+tar xf linux-$linux_version.tar.xz
 
 #change dir and build
-cd ./linux-4.4.1
+cd ./linux-$linux_version
 wget https://github.com/Stoney49th/openmediavault-linux-kernel/raw/master/.config-4.4.1
 mv ./.config-4.4.1 ./.config
 
-read -rsp $'\n\nFinished with all download and decompress steps. Will launch menuconfig now. If you dont want to change anything, just exit menuconfig without saving. Please press any key...\n'
+read -rsp $'\n\nFinished with all download and decompress steps. Will launch oldconfig, followed by menuconfig now.\nGoogle up on oldconfig to see how this works, just in case a maintenance fix resultet in a new config option.\nIf you dont want to change anything, just exit menuconfig without saving. Please press any key...\n'
+make oldconfig
 make menuconfig
 read -rsp $'\n\nFinished with all download and decompress steps. Press any key to start a clean build ...\n'
 
