@@ -1,6 +1,15 @@
 #!/bin/bash
 
-linux_version=4.4.2
+echo "Please enter the linux-subversion to download. It will be result in a version string like 4.4.YOURINPUT.
+So you just have to enter the last digit of the current latest 4.4 stable/longterm version found on kernel.org (e.g. 2,3,4 or newer :) ):"
+read uin_subver
+
+linux_version=4.4.$uin_subver
+echo "
+--------------------------------------------------------------------------
+Will try to download and compile linux-$linux_version as you've specified.
+--------------------------------------------------------------------------
+"
 
 echo "Please choose a custom kernel revision and name, like 1.0.fooMyName. Must start with a number, only '.' and '+' special chars allowed: "
 read custom_rev
